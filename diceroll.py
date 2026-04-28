@@ -24,13 +24,12 @@ def dice_roll(fixed_dice=None):
 
     # Determines if there are any fix dice already, and if not it rolls all 3 fresh
     if fixed_dice is None:
-        dice = list(np.random.choice(numpy_numbers, size = 3, replace = True))
+        dice = [int(x) for x in np.random.choice(numpy_numbers, size=3, replace=True)]
     else:
         # Only rerolls dice that aren't fixed
-        dice = list(fixed_dice)
-        for i in range(3):
-            if dice[i] not in fixed_dice:
-                dice[i] = int(np.random.choice(numpy_numbers))
+        dice = [int(x) for x in np.random.choice(numpy_numbers, size=3, replace=True)]
+        for i in range(len(fixed_dice)):
+           dice[i] = int(fixed_dice[i])
 
     # Checks which dice are fixed
     fixed_values = []
