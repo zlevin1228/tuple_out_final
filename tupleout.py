@@ -74,5 +74,24 @@ while not game_over:
         # Checks if the player has now reached the target score
         if players[current_player] >= target_score:
             print(f"\n {current_player} wins with {players[current_player]} points!")
+            print("\nFinal Scores:")
+            for name, score in players.items():
+                print(f" {name}: {score}")
+
+            # Saves results to a file with all past results
+            with open("gameresults.txt", "a") as records_file:
+                records_file.write("------ Game Result ------\n")
+                records_file.write(f"Winner: {current_player}\n")
+                for name, score in players.items():
+                    records_file.write(f" {name}: {score}\n")
+                records_file.write("\n")
+
+            # Adds it to the list of past games
+            print("\n--- Past Game Records ---")
+            with open("gameresults.txt", "r") as records_file:
+                for line in records_file:
+                    print(line)
+
+            # Ends the game
             game_over = True
             break
