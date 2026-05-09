@@ -1,4 +1,5 @@
 from diceroll import dice_roll
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -88,16 +89,17 @@ while not game_over:
             # Save game result to file
             with open("gameresults.txt", "a") as records_file:
                 records_file.write("------ Game Result ------\n")
-                records_file.write(f"Winner: {current_player}\n")
+                records_file.write("Winner: " + current_player + "\n")
                 for name, score in players.items():
                     records_file.write(f"  {name}: {score}\n")
                 records_file.write("\n")
 
             # Display all past game records
             print("\n--- Past Game Records ---")
-            with open("gameresults.txt", "r") as records_file:
-                for line in records_file:
-                    print(line)
+            if os.path.exists("gameresults.txt"):
+                with open("gameresults.txt", "r") as records_file:
+                    for line in records_file:
+                        print(line)
 
             # Pad score histories to equal length for the DataFrame
             max_turns = max(len(score_history[name]) for name in score_history)
